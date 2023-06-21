@@ -17,14 +17,14 @@ loadMoreButtonEl.addEventListener('click', onLoadMoreButtonClick);
 let searchText = '';
 let page = 1;
 const pageLimit = 40;
-let firstQuery = true;
+let isFirstQuery = true;
 
 function onSubmit(evt) {
   evt.preventDefault();
   galleryEl.innerHTML = '';
   page = 1;
   hideElement(loadMoreButtonEl);
-  firstQuery = true;
+  isFirstQuery = true;
   searchText = evt.currentTarget.elements.searchQuery.value;
   if (searchText.trim() === '') {
     return;
@@ -71,9 +71,9 @@ async function render(searchTarget) {
     renderItemsOFGalary(itemsForRender);
     showElement(loadMoreButtonEl);
     page += 1;
-    if (firstQuery) {
+    if (isFirstQuery) {
       Notify.success(`Hooray! We found ${totalItems} images.`);
-      firstQuery = false;
+      isFirstQuery = false;
     } else {
       smoothScrol();
     }
